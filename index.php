@@ -51,7 +51,7 @@ echo $aluno;
 */
 
 //Actualizado usuario
-
+/*
 $usuario = new Usuario();
 
 $usuario->loadById(7);
@@ -59,5 +59,15 @@ $usuario->loadById(7);
 $usuario->update("Professor","papel");
 
 echo $usuario;
+*/
 
+//Deletar usuario
+
+$usuario = new Usuario();
+
+$usuario->loadById(6);
+
+$usuario->delete();
+
+echo $usuario;
 

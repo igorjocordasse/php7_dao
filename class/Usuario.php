@@ -121,12 +121,27 @@ Class Usuario {
 
 		$sql = new sql();
 
-		$results = $sql->query("update tb_usuarios set deslogin = :LOGIN, dessenha=:PASSWORD where idusuario=:ID", array(
+		 $sql->query("update tb_usuarios set deslogin = :LOGIN, dessenha=:PASSWORD where idusuario=:ID", array(
 
 			':LOGIN'=>$this->getDeslogin(),
 			':PASSWORD'=>$this->getDessenha(),
 			':ID'=>$this->getIdusuario()
 		));
+	}
+
+	function delete(){
+
+		$sql = new sql();
+
+		$sql->query("delete from tb_usuarios where idusuario=:ID", array(
+
+			':ID'=>$this->getIdusuario()
+		));
+
+		$this->setDeslogin(0);
+		$this->setDeslogin("");
+		$this->setDessenha("");
+		$this->setDtcadastro(new DateTime());
 	}
 
 	function __construct($login = "",$password = ""){

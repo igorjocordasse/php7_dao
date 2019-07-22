@@ -39,6 +39,7 @@ Class Usuario {
 		$this->dtcadastro = $value;
 	}
 
+
 	function setData($data){
 
 		$this->setIdusuario($data['idusuario']);
@@ -95,6 +96,43 @@ Class Usuario {
 			throw new Exception("Error Processing Request");
 			
 		}
+	}
+
+	function insert(){
+
+		$sql = new sql();
+
+		$results = $sql->select("call sp_usuarios_insert(:LOGIN,:PASSWORD)", array(
+
+			":LOGIN"=>$this->getDeslogin(),
+			":PASSWORD"=>$this->getDessenha()
+		));
+
+		if (count($results) > 0) 
+			
+		$this->setData($results[0]);
+	}
+
+
+	function update($login,$password){
+
+		$this->setDeslogin($login);
+		$this->setDessenha($password);
+
+		$sql = new sql();
+
+		$results = $sql->query("update tb_usuarios set deslogin = :LOGIN, dessenha=:PASSWORD where idusuario=:ID", array(
+
+			':LOGIN'=>$this->getDeslogin(),
+			':PASSWORD'=>$this->getDessenha(),
+			':ID'=>$this->getIdusuario()
+		));
+	}
+
+	function __construct($login = "",$password = ""){
+
+		$this->setDeslogin($login);
+		$this->setDessenha($password);
 	}
 
 	function __toString(){

@@ -33,8 +33,31 @@ $search = Usuario::search("u");
 echo json_encode($search);
 */
 
+/*
 $usuario = new Usuario();
 
 $usuario->login("igor","doheioid");
 
 echo $usuario;
+*/
+
+// Criando novo usuarios
+/*
+$aluno = new Usuario("Beny","8888");
+
+$aluno->insert();
+
+echo $aluno;
+*/
+
+//Actualizado usuario
+
+$usuario = new Usuario();
+
+$usuario->loadById(7);
+
+$usuario->update("Professor","papel");
+
+echo $usuario;
+
+
